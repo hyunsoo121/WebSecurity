@@ -1,23 +1,18 @@
 version: '3.8'
 
 services:
-  # 1. LocalStack 서비스 정의
   localstack:
     image: localstack/localstack:latest
     container_name: localstack
-    # 호스트 머신(스프링 앱 및 AWS CLI)이 접근할 수 있도록 포트 공개
     ports:
       - "4566:4566"
 
-  # 2. Imgproxy 서비스 정의
   imgproxy_server:
     image: ghcr.io/imgproxy/imgproxy:v3.15.0
     container_name: imgproxy_server
-    # 호스트 8081 -> 컨테이너 8080 포트 포워딩
     ports:
       - "8081:8080"
     environment:
-      # 🚨 SSRF 시연을 위한 방어 비활성화 (Forbidden 해결 핵심)
       - IMGPROXY_BIND=0.0.0.0:8080
       - IMGPROXY_KEY=${IMGPROXY_KEY}
       - IMGPROXY_SALT=${IMGPROXY_SALT}

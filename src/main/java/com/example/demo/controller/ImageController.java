@@ -49,11 +49,9 @@ public class ImageController {
 
         for (S3Object obj : listRes.contents()) {
 
-            // 1. Imgproxy 컨테이너에서 LocalStack에 접근하기 위해 host.docker.internal 사용.
-            //    SSRF 방어가 활성화된 상태라면, 이 주소는 공인 IP로 인식되어 Forbidden을 발생시킬 것입니다.
-            String originUrl = String.format("http://host.docker.internal:4566/%s/%s", bucket, obj.key());
+            String originUrl = String.format("%s/%s/%s", s3BaseUrl, bucket, obj.key());
 
-            log.info("ORIGIN S3 URL (SSRF Test Target) = {}", originUrl);
+            log.info("ORIGIN S3 URL (Refactored) = {}", originUrl);
 
             // 이미지 처리 옵션 (300x200으로 맞춤)
             String options = "/rs:fit:300:200/q:85";
