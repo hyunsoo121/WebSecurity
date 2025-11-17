@@ -1,0 +1,32 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 8080
+
+file:
+  upload-dir: uploads
+
+aws:
+  # .env 파일에서 참조
+  region: ${AWS_REGION}
+  accessKey: ${AWS_ACCESS_KEY}
+  secretKey: ${AWS_SECRET_KEY}
+  s3:
+    endpoint: ${AWS_S3_ENDPOINT}
+
+app:
+  s3:
+    bucket: ${APP_S3_BUCKET}
+    base-url: ${APP_S3_BASE_URL}
+
+# --- Imgproxy 설정 ---
+imgproxy:
+  base-url: ${IMGPROXY_BASE_URL}
+  key: ${IMGPROXY_KEY}
+  salt: ${IMGPROXY_SALT}
