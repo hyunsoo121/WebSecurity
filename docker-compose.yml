@@ -8,7 +8,7 @@ services:
       - "4566:4566"
 
   imgproxy_server:
-    image: ghcr.io/imgproxy/imgproxy:v3.15.0
+    image: ghcr.io/imgproxy/imgproxy:v3.14.0
     container_name: imgproxy_server
     ports:
       - "8081:8080"
